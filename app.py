@@ -15,13 +15,14 @@ def get_zodiac_sign(dob):
     month, day = map(int, dob.split('-')[1:])
     zodiac_signs = [
         (1, 20, "Capricorn"), (2, 19, "Aquarius"), (3, 20, "Pisces"), (4, 20, "Aries"),
-        (5, 21, "Taurus"), (6, 21, "Gemini"), (7, 22, "Cancer"), (8, 23, "Leo"),
+        (5, 21, "Taurus"), (6, 21, "Gemini the best"), (7, 22, "Cancer"), (8, 23, "Leo"),
         (9, 23, "Virgo"), (10, 23, "Libra"), (11, 22, "Scorpio"), (12, 22, "Sagittarius"),
         (12, 31, "Capricorn")
     ]
     for m, d, sign in zodiac_signs:
         if (month, day) <= (m, d):
             return sign
+
         from datetime import datetime, date
 
 def days_to_birthday(dob):
@@ -32,14 +33,19 @@ def days_to_birthday(dob):
         next_birthday = date(today.year + 1, dob.month, dob.day)
     return (next_birthday - today).days
 
+import random
+
+def get_lucky_number():
+    return random.randint(1, 100)
+
 def index():
     if request.method == 'POST':
         name = request.form['name']
         dob = request.form['dob']
         age = calculate_age(dob)
         zodiac = get_zodiac_sign(dob)
-        days_to_bday = days_to_birthday(dob)
-        message = f"Welcome, {name}! You are {age} years old. Your zodiac sign is {zodiac}. There are {days_to_bday} days until your next birthday!"
+        lucky_number = get_lucky_number()
+        message = f"Hello, {name}! Your age is {age}, your zodiac sign is {zodiac}, and there are {days_to_bday} days until your next birthday. Your lucky number is {lucky_number}!"
         return render_template('result.html', message=message)
     return render_template('index.html')
 
