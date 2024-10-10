@@ -34,6 +34,6 @@ def get_zodiac_sign(dob):
     for m, d, sign in zodiac_signs:
         if (month, day) <= (m, d):
             return sign
-
+ 
 if __name__ == '__main__':
     app.run(debug=True)
